@@ -113,3 +113,41 @@ const user = {
 // WHY??
 // 1. One of the primary uses for an IIFE is to create private scope.
 // 2.  closures to protect variables or methods from being accessed!(Protect from the gobalPollution)
+
+
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// A) Falsy Values:-   false, 0, -0, BigInt 0n, "", null, undefined, NaN
+// B) Truth values:- "0", 'false', " ", [], {}, function(){}
+
+// C) In array
+// if (userEmail.length === 0) {
+//     console.log("Array is empty");
+// }
+
+// D) in object
+// const emptyObj = {}
+
+// if (Object.keys(emptyObj).length === 0) {
+//     console.log("Object is empty");
+// }
+
+// +++++++++++++++ Interesting Operator +++++++++++++++++++++++++++
+// **  Nullish Coalescing Operator (??): null undefined
+// let val1;
+// // val1 = 5 ?? 10
+// // val1 = null ?? 10
+// // val1 = undefined ?? 15
+// val1 = null ?? 10 ?? 20
+
+
+
+// console.log(val1);
+
+// Terniary Operator
+
+// condition ? true : false
+
+const iceTeaPrice = 100
+iceTeaPrice <= 80 ? console.log("less than 80") : console.log("more than 80")
+
+
