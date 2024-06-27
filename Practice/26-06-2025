@@ -34,3 +34,100 @@ count.reset(); // Resetting the counter
 
 console.log(count()); // Output: 1
 console.log(count()); // Output: 2
+<------------------------------------------------------- 27-06-2025 ------------------------------------------------->
+3. computeAmount().lacs(15).crores(5).crores(2).lacs(20).thousand(45).crores(7).value();
+implement computeAmount()-------> Chaining of methods
+
+  function computeAmount(){
+    let totalAmount = 0;
+    const methods = {
+        lacs(amount){
+            totalAmount += amount * 100000;
+            return methods;
+        },
+        crores(amount){
+            totalAmount += amount * 10000000;
+            return methods;
+        },
+        thousand(amount){
+            totalAmount += amount * 1000;
+            return methods;
+        },
+        value(){
+            return totalAmount;
+        }
+    };
+
+    return methods;
+}
+
+console.log(computeAmount().lacs(15).crores(5).crores(2).lacs(20).thousand(45).crores(7).value());
+console.log(computeAmount().thousand(45).value());
+-------------------------<- Another Approach ->----------------------
+
+class Car {
+    constructor() {
+        this.speed = 0;
+        this.color = 'red';
+    }
+
+    setColor(newColor) {
+        this.color = newColor;
+        return this; // Returning the current object to enable chaining
+    }
+
+    accelerate(amount) {
+        this.speed += amount;
+        return this; // Returning the current object to enable chaining
+    }
+
+    brake(amount) {
+        this.speed -= amount;
+        return this; // Returning the current object to enable chaining
+    }
+
+    getStatus() {
+        console.log(`The car is ${this.color} and moving at ${this.speed} mph.`);
+        return this; // Returning the current object to enable chaining
+    }
+}
+
+// Usage of method chaining
+let myCar = new Car();
+myCar.setColor('blue').accelerate(50).getStatus().brake(20).getStatus();
+
+
+4 . Bind Function:- The bind method is a powerful tool in JavaScript for controlling the this context and partially applying function arguments.
+
+const person = {
+    name: 'Alice',
+    greet: function(greeting) {
+        console.log(`${greeting}, my name is ${this.name}`);
+    }
+};
+
+const anotherPerson = {
+    name: 'Bob'
+};
+
+// Using bind to create a new function with `this` bound to `anotherPerson`
+const boundGreet = person.greet.bind(anotherPerson);
+
+boundGreet('Hello'); // Output: Hello, my name is Bob
+
+
+********** Partial Application ***************
+function multiply(a, b) {
+    return a * b;
+}
+// Create a new function where `a` is always 2
+const double = multiply.bind(null, 2);
+
+console.log(double(5)); // Output: 10
+console.log(double(10)); // Output: 20
+
+** What is Two-way Binding in js how can you achieve ------------->
+ The Proxy approach is more modern and provides a cleaner and more flexible solution than Object.defineProperty.
+
+
+
