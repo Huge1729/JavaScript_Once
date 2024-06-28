@@ -130,4 +130,51 @@ console.log(double(10)); // Output: 20
  The Proxy approach is more modern and provides a cleaner and more flexible solution than Object.defineProperty.
 
 
+5. Create a fatchWithAutoRetry(fetcher,count), which automatically fetch again when error happens until
+the maximum count is not exhausted;
+--------> Use Recursion and Promise Implementation 
+// Write, Edit and Run your Javascript code using JS Online Compiler
+console.log("Hello, World!");
+
+async function fetchWithAutoRetry(fetcher ,maximumRetryCount){
+    if(maximumRetryCount > 0){
+        try{
+            console.log("Inside try Block: ",maximumRetryCount);
+            const result =  await fetcher();
+            return result;
+        }catch(error){
+            console.log("Inside catch Block: ",maximumRetryCount);
+            const result = "Oops !!"
+            result = await fetchWithAutoRetry(fetcher , maximumRetryCount-1);
+            return result;
+        }
+    }
+}
+
+// promise is a function so write () I had syntax error
+const p1 = () =>  new Promise((resolve , reject)=>{
+    // return reject("p1");
+    let value = Math.random();
+    console.log(value)
+    if( value > 0.5){
+        resolve('p1');
+    }
+    else{
+        reject('p1');
+    }
+});
+
+(async function a(){
+    try{
+        const result = await fetchWithAutoRetry(p1 , 3);
+        console.log("result" , result);
+    }catch(e){
+        console.log("error",e);
+       
+    }
+})();
+
+
+
+
 
