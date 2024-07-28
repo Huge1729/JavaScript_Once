@@ -104,3 +104,15 @@ data types :
 // console.log(newDate.getMonth() + 1); April
 // console.log(newDate.getDay());   Thusraday
 
+// ********************** Const Keyword ****************
+// Certainly! The keyword const in JavaScript is used to define a constant reference to a value.
+// This means that the reference itself cannot be reassigned, but the contents of the value the reference points to can be modified 
+//     if the value is an object or array.
+// Example
+// const myArray = [1, 2, 3];
+// myArray = [4, 5, 6]; // Error: Assignment to constant variable.
+
+// myArray[0] = 10; // This is allowed
+// console.log(myArray); // Output: [10, 2, 3]
+
+
