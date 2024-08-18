@@ -179,6 +179,21 @@ const p1 = () =>  new Promise((resolve , reject)=>{
 
    Rem (short for “root-em”) units dictate an element's font size relative to the size of the root element. Generally 1 Rem = 16px
 
+7. What is the event delegation in JavaScript, and why is it advantageous?
+
+Event delegation involves attaching a single event listener to a common ancestor instead of individual elements.
+It’s efficient for handling events on dynamically created or numerous elements.
+Ex: Scenario: Imagine you have a web application that displays a list of comments under a blog post. 
+Each comment has a "Like" button. Users can add new comments, and each comment needs to have its own "Like" button that works independently.
+With Event Delegation:
+Instead of adding event listeners to each "Like" button, you attach a single event listener to the parent element that contains all the comments.
+This parent element listens for clicks and determines if the click was on a "Like" button
+document.getElementById('comments-list').addEventListener('click', function(event) {
+    if (event.target && event.target.classList.contains('like-button')) {
+        console.log('Like button clicked for comment:', event.target.dataset.commentId);
+        // Handle the "like" action here
+    }
+});
 
 
 
