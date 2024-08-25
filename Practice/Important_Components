@@ -1,0 +1,115 @@
+1. Toast implementation
+function Toast({ id, text, onClose, timer = 10 }) {
+  const [count, setCount] = useState(timer);
+  const timerRef = useRef(null);
+
+  const parentRef = useRef(document.querySelector(".toast-container"));
+
+  if (!parentRef.current) {
+    const el = document.createElement("div");
+    el.classList.add("toast-container");
+    document.body.appendChild(el);
+    parentRef.current = el;
+  }
+
+  useEffect(() => {
+    timerRef.current = setInterval(() => {
+      setCount((prev) => prev - 1);
+    }, 1000);
+
+    return () => {
+      clearInterval(timerRef.current);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (count <= 0) {
+      onClose(id);
+      clearInterval(timerRef.current);
+    }
+  }, [count, id, onClose]);
+
+  const handleClick = () => {
+    onClose(id);
+    clearInterval(timerRef.current);
+  };
+
+  return createPortal(
+    <div className="toast">
+      <p>
+        {id}
+        {"=>"}
+        {text}-{count}
+      </p>
+      <button onClick={handleClick}>x</button>
+    </div>,
+    parentRef.current
+  );
+}
+
+function App() {
+  const [toasts, setToasts] = useState([]);
+
+  const closeToast = (id) => {
+    setToasts((prev) => prev.filter((t) => t.id !== id));
+  };
+
+  const addToast = () => {
+    setToasts((prev) => [
+      ...prev,
+      {
+        id: prev.length + 1,
+        text: "I am toast",
+        onClose: closeToast,
+        timer: 20,
+      },
+    ]);
+  };
+
+  const handleClick = () => {
+    addToast();
+  };
+
+  return (
+    <div>
+      <button onClick={handleClick}>Show Toast</button>
+      {toasts.map((toast) => {
+        return <Toast key={toast.id} {...toast} />;
+      })}
+    </div>
+  );
+} 
+-----------------------------------------------------------------------------------------------------------------
+2. Debounce Function
+function debounce(func, delay) {
+    let timer;
+    return function(...args) {
+        clearTimeout(timer); // Clear the previous timer
+        timer = setTimeout(() => {
+            func.apply(this, args); // Execute the function after the delay
+        }, delay);
+    };
+}
+
+// Example usage
+let count = 0;
+
+function updateCount() {
+    console.log("Final count:", count);
+}
+
+const debouncedUpdateCount = debounce(updateCount, 5000);
+
+// Simulating continuous updates
+const interval = setInterval(() => {
+    count++;
+    debouncedUpdateCount();
+    if (count === 10) clearInterval(interval); // Stop updates after 10 increments
+}, 1000);
+---------------------------------------------------------------------------------------------------------------------
+3. Acordian
+---------------------------------------------------------------------------------------------------------------------
+4. Pagination
+---------------------------------------------------------------------------------------------------------------------
+5. Trello
+---------------------------------------------------------------------------------------------------------------------
